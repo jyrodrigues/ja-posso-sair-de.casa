@@ -2,15 +2,141 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Não Pode</title>
+        <title>Pode?</title>
+        <link rel="stylesheet" href="estilo.css">
     </head>
     <body>
-        <h3>Já posso sair de casa?</h3>
-        <div>
-            <h1>Não!</h1>
+
+        <div id="pergunta"><span class="texto">Já posso sair de casa?</span></div>
+        <div id="resposta"><span class="texto">Não.</span></div>
+        <div id="imagemAtualizando">
+            <img class="atualizando" src='atualizando.svg' alt-text='atualizando' title='Tá esperando o que?'/>
         </div>
+        <button id="botaoAtualizar">E agora?</button>
+
+        <div id="linksFinais" style=>
+            <div id="listaDeLinks">
+                <p><a href="https://4dtoys.com/">Brinquedos (virtuais) em 4 dimensões</a></p>
+                <p><a href="https://eater.net/quaternions/">Videos interativos sobre matemática</a> (sobre quaterniões e projeção estereográfica)</p>
+                <p><a href="https://www.media.mit.edu/groups/mediated-matter/projects/">Mediated Matter</a>
+                     é um grupo do MIT Media Lab liderado pela <a href="https://www.media.mit.edu/people/neri/overview/">Neri Oxman</a>
+                    <br/>
+                    <span> (Pra conhecê-la melhor: série "Abstract" no Netflix, episódio 2 da segunda temporada)</span></p>
+                <p><a href="https://www.c82.net/werner/">Cores</a> e outros trabalhos do <a href="https://www.c82.net/">Nicholas Rougeux</a></p>
+                <p><a href="https://tylerxhobbs.com/">Tyler Hobbs</a></p>
+                <p><a href="https://rvig.art/">Richard Vigniel</a></p>
+                <p>Instagram <a href="https://www.instagram.com/genart.world/">1</a> <a href="https://www.instagram.com/jyrodrigues/">2</a></p>
+                <p><a href="https://github.com/jyrodrigues">Meu Github</a></p>
+                <p><a href="https://genart.world">Generative Art</a> em breve...</p>
+                <button id="esconderLinks">Esconder links</button>
+            </div>
+        </div>
+
+
+        <footer>
+            <a href="https://michelszklo.github.io/coronavirus.html">Por quê?</a>
+            <a href="https://coronavirus.jhu.edu/map.html">Mas e se...?</a>
+        </footer>
+
     </body>
     <script>
+        // Colocamos os elementos em variáveis no começo do script para não precisar buscar no DOM mais de uma vez.
+        var resposta = document.getElementById("resposta");
+        var botaoAtualizar = document.getElementById("botaoAtualizar");
+        var imagemAtualizando = document.getElementById("imagemAtualizando");
+        var linksFinais = document.getElementById("linksFinais");
+
+        var mensagens =
+            [ "E agora?"
+            , "Agora já pode?"
+            , "Posso?"
+            , "Deixa, vai?!"
+            , "Quem sabe agora?"
+            , "Agora, pode?"
+            , "Agora?"
+            , "Cacete!"
+            , "Vai se fuder!"
+            , "Corona de cú é rola!"
+            , "Filho da puta!"
+            , "EU PRECISO SAIR!"
+            , "NAO TÁ DANDO!!!"
+            , "(respira fundo...)"
+            , "ta foda pra todo mundo"
+            , "fica, fica que é melhor"
+            , "se não por si mesmo, pelos outros né?"
+            , "(xinga que ajuda também)"
+            , "..."
+            , "Tá fazendo o que aqui ainda?"
+            , "Vai pra casa!"
+            , "Sério, vai..."
+            , "E agora?"
+            , "Agora já pode?"
+            , "Posso?"
+            , "Deixa, vai?!"
+            , "Quem sabe agora?"
+            , "Agora, pode?"
+            , "Agora?"
+            , "Cacete!"
+            , "Prêmio \"Entediado no Coronga 2020\" pra vc!"
+            , "Até eu já cansei"
+            , "Tá, vou deixar uns links pra vc se entreter..."
+            , "Agora acabou, pessoa linda! <3"
+            ]
+
+        var indice = 0;
+        var tempoComeco;
+
+        botaoAtualizar.addEventListener("click", atualizaBotao);
+        window.onload = function() {
+            atualizaBotao();
+            tempoComeco = new Date();
+        }
+
+        // Guardamos o id do timeout para evitar multiplos timeouts ao mesmo tempo:
+        // antes de adicionarmos um novo timeout, limpamos o antigo.
+        var timeoutAntigo;
+
+        function atualizaBotao() {
+            resposta.style.display = "none";
+            imagemAtualizando.style.display = "block";
+            botaoAtualizar.classList.add("desabilitado");
+            document.body.classList.add("desabilitado");
+
+            clearTimeout(timeoutAntigo);
+            timeoutAntigo = setTimeout(function() {
+                resposta.style.display = "block";
+                imagemAtualizando.style.display = "none";
+                botaoAtualizar.classList.remove("desabilitado");
+                document.body.classList.remove("desabilitado");
+
+                indice = (indice + 1) % mensagens.length;
+                botaoAtualizar.innerHTML = mensagens[indice];
+
+                if (indice === 0) {
+                    mostraFinal();
+                    localStorage.setItem(cacheLocal, "Fica em casa, mas veja os links :)");
+                }
+            }, 15);
+        }
+
+        function mostraFinal() {
+            linksFinais.classList.add("aparecendo");
+        }
+
+        var cacheLocal = 'nao, nao pode';
+        var jaBrincouAntes = localStorage.getItem(cacheLocal);
+
+        if (jaBrincouAntes && jaBrincouAntes !== "") {
+            mostraFinal();
+        }
+
+
+        document.getElementById("esconderLinks").addEventListener("click", function() {
+            localStorage.removeItem(cacheLocal);
+            linksFinais.classList.remove("aparecendo");
+        });
+
+
         console.log("Fica em casa, fica...");
     </script>
 </html>

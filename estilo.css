@@ -1,0 +1,128 @@
+/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.26, autoprefixer: v9.7.3) */
+
+* {
+    font-family: sans-serif;
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#pergunta, #resposta {
+    position: relative;
+    height: 300px;
+}
+
+#pergunta {
+    background-color: aliceblue;
+}
+
+#pergunta > .texto,
+#resposta > .texto {
+    position: absolute;
+    top: 55%;
+    width: 100%;
+    margin: -50px 0 0;
+    font-size: 60px;
+    text-align: center;
+}
+
+#imagemAtualizando {
+    display: none;
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+img.atualizando {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 80px;;
+    margin: -40px 0 0 -40px;;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#botaoAtualizar {
+    position: relative;
+    padding: 10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+}
+
+#botaoAtualizar:hover {
+    box-shadow: 0 0 3px 1px rgb(170,178,185);
+}
+
+#botaoAtualizar:active {
+    background-color: aliceblue;
+    opacity: 70%;
+}
+
+body.desabilitado {
+    cursor: progress;
+}
+
+#botaoAtualizar.desabilitado {
+    cursor: progress;
+    box-shadow: none;
+    opacity: 70%;
+    background-color: unset;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+footer > a {
+    position: relative;
+    opacity: 70%;
+}
+
+footer > a:last-of-type {
+    right: 0;
+}
+
+#linksFinais {
+    position: relative;
+    height: calc(100% - 640px);
+    visibility: hidden;
+    opacity: 0;
+}
+
+#linksFinais.aparecendo {
+    visibility: visible;
+    transition: opacity 2s;
+    opacity: 1;
+}
+
+#listaDeLinks {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    line-height: 32px;
+}
