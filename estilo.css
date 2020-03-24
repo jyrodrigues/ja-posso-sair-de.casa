@@ -128,4 +128,5 @@ footer > a:last-of-type {
     transform: translate(-50%, -50%);
     text-align: center;
     line-height: 32px;
+    width: 80%;
 }
