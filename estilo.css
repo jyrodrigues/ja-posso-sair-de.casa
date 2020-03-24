@@ -55,15 +55,18 @@ img.atualizando {
     }
 }
 
-#botaoAtualizar {
-    position: relative;
+button {
     padding: 10px;
-    left: 50%;
-    transform: translate(-50%, -50%);
     font-size: 16px;
     cursor: pointer;
     border: none;
     border-radius: 4px;
+}
+
+#botaoAtualizar {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #botaoAtualizar:hover {

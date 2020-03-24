@@ -14,28 +14,29 @@
         </div>
         <button id="botaoAtualizar">E agora?</button>
 
-        <div id="linksFinais" style=>
+        <div id="linksFinais">
             <div id="listaDeLinks">
-                <p><a href="https://4dtoys.com/">Brinquedos (virtuais) em 4 dimensões</a></p>
-                <p><a href="https://eater.net/quaternions/">Videos interativos sobre matemática</a> (sobre quaterniões e projeção estereográfica)</p>
-                <p><a href="https://www.media.mit.edu/groups/mediated-matter/projects/">Mediated Matter</a>
-                     é um grupo do MIT Media Lab liderado pela <a href="https://www.media.mit.edu/people/neri/overview/">Neri Oxman</a>
+                <p><a target="_blank" rel="noopener noreferrer" href="https://4dtoys.com/">Brinquedos (virtuais) em 4 dimensões</a></p>
+                <p><a target="_blank" rel="noopener noreferrer" href="https://eater.net/quaternions/">Videos interativos sobre matemática</a> (sobre quaterniões e projeção estereográfica)</p>
+                <p><a target="_blank" rel="noopener noreferrer" href="https://www.media.mit.edu/groups/mediated-matter/projects/">Mediated Matter</a>
+                     é um grupo do MIT Media Lab liderado pela <a target="_blank" rel="noopener noreferrer" href="https://www.media.mit.edu/people/neri/overview/">Neri Oxman</a>
                     <br/>
                     <span> (Pra conhecê-la melhor: série "Abstract" no Netflix, episódio 2 da segunda temporada)</span></p>
-                <p><a href="https://www.c82.net/werner/">Cores</a> e outros trabalhos do <a href="https://www.c82.net/">Nicholas Rougeux</a></p>
-                <p><a href="https://tylerxhobbs.com/">Tyler Hobbs</a></p>
-                <p><a href="https://rvig.art/">Richard Vigniel</a></p>
-                <p>Instagram <a href="https://www.instagram.com/genart.world/">1</a> <a href="https://www.instagram.com/jyrodrigues/">2</a></p>
-                <p><a href="https://github.com/jyrodrigues">Meu Github</a></p>
-                <p><a href="https://genart.world">Generative Art</a> em breve...</p>
+                <p><a target="_blank" rel="noopener noreferrer" href="https://www.c82.net/werner/">Cores</a> e outros trabalhos do <a target="_blank" rel="noopener noreferrer" href="https://www.c82.net/">Nicholas Rougeux</a></p>
+                <p><a target="_blank" rel="noopener noreferrer" href="https://tylerxhobbs.com/">Tyler Hobbs</a></p>
+                <p><a target="_blank" rel="noopener noreferrer" href="https://rvig.art/">Richard Vigniel</a></p>
+                <p>Instagram <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/genart.world/">1</a> <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/jyrodrigues/">2</a></p>
+                <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/jyrodrigues">Meu Github</a></p>
+                <p><a target="_blank" rel="noopener noreferrer" href="https://genart.world">Generative Art</a> em breve...</p>
                 <button id="esconderLinks">Esconder links</button>
+                <p id="tempoDeUso"></p>
             </div>
         </div>
 
 
         <footer>
-            <a href="https://michelszklo.github.io/coronavirus.html">Por quê?</a>
-            <a href="https://coronavirus.jhu.edu/map.html">Mas e se...?</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://michelszklo.github.io/coronavirus.html">Por quê?</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://coronavirus.jhu.edu/map.html">Mas e se...?</a>
         </footer>
 
     </body>
@@ -59,28 +60,23 @@
             , "Corona de cú é rola!"
             , "Filho da puta!"
             , "EU PRECISO SAIR!"
+            , "EU PRECISO SAIR DE CASA!"
             , "NAO TÁ DANDO!!!"
             , "(respira fundo...)"
             , "ta foda pra todo mundo"
             , "fica, fica que é melhor"
-            , "se não por si mesmo, pelos outros né?"
-            , "(xinga que ajuda também)"
+            , "Se não por si mesmo, pelos outros né?"
+            , "Isso, boa escolha!"
             , "..."
             , "Tá fazendo o que aqui ainda?"
             , "Vai pra casa!"
             , "Sério, vai..."
-            , "E agora?"
-            , "Agora já pode?"
-            , "Posso?"
-            , "Deixa, vai?!"
-            , "Quem sabe agora?"
-            , "Agora, pode?"
-            , "Agora?"
-            , "Cacete!"
+            , "Ou fica, quero dizer..."
+            , "Fica em casa!"
             , "Prêmio \"Entediado no Coronga 2020\" pra vc!"
             , "Até eu já cansei"
             , "Tá, vou deixar uns links pra vc se entreter..."
-            , "Agora acabou, pessoa linda! <3"
+            , "Agora acabou, pessoa linda! Boa quarentena pra vc!"
             ]
 
         var indice = 0;
@@ -89,7 +85,16 @@
         botaoAtualizar.addEventListener("click", atualizaBotao);
         window.onload = function() {
             atualizaBotao();
+
             tempoComeco = new Date();
+
+            function mostraTempo() {
+                var segundosDeUso = Math.round((new Date() - tempoComeco) / 1000);
+                document.getElementById("tempoDeUso").innerHTML = "Você já está neste site há " + tempoEmHHMMSS(segundosDeUso);
+            }
+
+            mostraTempo();
+            setInterval(mostraTempo, 1010);
         }
 
         // Guardamos o id do timeout para evitar multiplos timeouts ao mesmo tempo:
@@ -116,7 +121,7 @@
                     mostraFinal();
                     localStorage.setItem(cacheLocal, "Fica em casa, mas veja os links :)");
                 }
-            }, 15);
+            }, 1500);
         }
 
         function mostraFinal() {
@@ -136,7 +141,23 @@
             linksFinais.classList.remove("aparecendo");
         });
 
+        function tempoEmHHMMSS(segundos) {
+            var data = new Date(0);
+            data.setSeconds(segundos);
+            return data.toISOString().substr(11, 8);
+        }
 
         console.log("Fica em casa, fica...");
+
+
+        /**
+         * Resolvie escrever esse html/css/js todo em português para experimentar (já que costumo
+         * escrever código sempre em inglês). Valeu a experiência, principalmente do ponto de vista
+         * de futuramente "ensinar" alguém que não saiba inglês a programar para a web. Quem sabe
+         * até as semelhanças gritantes entre as linguas em alguns lugares do código não ajudem
+         * a incentivar alguém a aprender outra lingua.
+         *
+         * Mas é isso, não pretendo escrever em português nunca mais em projetos sozinho!
+         */
     </script>
 </html>
