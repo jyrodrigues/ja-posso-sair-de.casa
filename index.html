@@ -67,16 +67,7 @@
             , "fica, fica que é melhor"
             , "Se não por si mesmo, pelos outros né?"
             , "Isso, boa escolha!"
-            , "..."
-            , "Tá fazendo o que aqui ainda?"
-            , "Vai pra casa!"
-            , "Sério, vai..."
-            , "Ou fica, quero dizer..."
-            , "Fica em casa!"
-            , "Prêmio \"Entediado no Coronga 2020\" pra vc!"
-            , "Até eu já cansei"
             , "Tá, vou deixar uns links pra vc se entreter..."
-            , "Agora acabou, pessoa linda! Boa quarentena pra vc!"
             ]
 
         var indice = 0;
@@ -84,7 +75,7 @@
 
         botaoAtualizar.addEventListener("click", atualizaBotao);
         window.onload = function() {
-            atualizaBotao();
+            atualizaBotao(2000);
 
             tempoComeco = new Date();
 
@@ -101,7 +92,12 @@
         // antes de adicionarmos um novo timeout, limpamos o antigo.
         var timeoutAntigo;
 
-        function atualizaBotao() {
+        function atualizaBotao(delay) {
+            if (!delay) {
+                delay = 500;
+            }
+
+
             resposta.style.display = "none";
             imagemAtualizando.style.display = "block";
             botaoAtualizar.classList.add("desabilitado");
@@ -121,7 +117,7 @@
                     mostraFinal();
                     localStorage.setItem(cacheLocal, "Fica em casa, mas veja os links :)");
                 }
-            }, 1500);
+            }, delay);
         }
 
         function mostraFinal() {
